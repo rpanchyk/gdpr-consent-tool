@@ -1,6 +1,5 @@
 package com.firetrot.tools.gct.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.firetrot.tools.gct.handler.ErrorHandler;
 import com.firetrot.tools.gct.handler.GdprComposeHandler;
 import com.firetrot.tools.gct.handler.GdprParseHandler;
@@ -22,8 +21,8 @@ public class RouteConfiguration {
     }
 
     @Bean
-    public GdprParseHandler gdprParseHandler(GdprConsentParser parser, ObjectMapper mapper) {
-        return new GdprParseHandler(parser, mapper);
+    public GdprParseHandler gdprParseHandler(GdprConsentParser parser) {
+        return new GdprParseHandler(parser);
     }
 
     @Bean
