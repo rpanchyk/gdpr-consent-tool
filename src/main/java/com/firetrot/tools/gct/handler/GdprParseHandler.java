@@ -3,7 +3,7 @@ package com.firetrot.tools.gct.handler;
 import com.firetrot.tools.gct.exception.BadRequestException;
 import com.firetrot.tools.gct.parser.GdprConsentParser;
 import com.firetrot.tools.gct.parser.model.GdprConsent;
-import com.firetrot.tools.gct.proto.ParseResponse;
+import com.firetrot.tools.gct.proto.response.ParseResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.BodyInserters;

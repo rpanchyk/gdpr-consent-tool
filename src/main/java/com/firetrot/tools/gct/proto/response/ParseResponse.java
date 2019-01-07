@@ -1,4 +1,4 @@
-package com.firetrot.tools.gct.proto;
+package com.firetrot.tools.gct.proto.response;
 
 import com.firetrot.tools.gct.parser.model.GdprConsent;
 import lombok.AllArgsConstructor;

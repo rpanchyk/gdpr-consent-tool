@@ -8,13 +8,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class JacksonConfiguration {
 
     @Bean
-    public ObjectMapper mapper() {
+    public ObjectMapper objectMapper() {
         return new ObjectMapper()
                 .configure(MapperFeature.DEFAULT_VIEW_INCLUSION, false)
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)

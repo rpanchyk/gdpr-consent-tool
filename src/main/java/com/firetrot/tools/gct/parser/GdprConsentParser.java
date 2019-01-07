@@ -7,6 +7,9 @@ import com.iab.gdpr.consent.VendorConsent;
 import com.iab.gdpr.consent.VendorConsentDecoder;
 import reactor.core.publisher.Mono;
 
+import java.util.Set;
+import java.util.TreeSet;
+
 public class GdprConsentParser {
 
     public Mono<GdprConsent> parse(String consent) {
@@ -19,7 +22,7 @@ public class GdprConsentParser {
         }
     }
 
-    private GdprConsent toGdprConsent(VendorConsent vendorConsent) {
+    private static GdprConsent toGdprConsent(VendorConsent vendorConsent) {
         return GdprConsent.builder()
                 .version(vendorConsent.getVersion())
                 .consentRecordCreated(vendorConsent.getConsentRecordCreated())
@@ -33,6 +36,20 @@ public class GdprConsentParser {
                 .allowedPurposes(vendorConsent.getAllowedPurposes())
                 .allowedPurposesBits(vendorConsent.getAllowedPurposesBits())
                 .maxVendorId(vendorConsent.getMaxVendorId())
+                .allowedVendorIds(allowedVendorIds(vendorConsent))
                 .build();
+    }
+
+    /**
+     * Returns all possible vendor IDs for given {@link VendorConsent}.
+     */
+    private static Set<Integer> allowedVendorIds(VendorConsent vendorConsent) {
+        final Set<Integer> allowedVendorIds = new TreeSet<>();
+        for (int i = 0; i < vendorConsent.getMaxVendorId(); i++) {
+            if (vendorConsent.isVendorAllowed(i)) {
+                allowedVendorIds.add(i);
+            }
+        }
+        return allowedVendorIds;
     }
 }

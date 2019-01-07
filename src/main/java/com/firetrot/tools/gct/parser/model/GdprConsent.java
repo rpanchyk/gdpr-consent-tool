@@ -34,4 +34,6 @@ public class GdprConsent {
     int allowedPurposesBits;
 
     int maxVendorId;
+
+    Set<Integer> allowedVendorIds;
 }
