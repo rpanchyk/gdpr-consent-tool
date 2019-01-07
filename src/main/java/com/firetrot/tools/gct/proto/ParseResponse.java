@@ -8,15 +8,17 @@ import lombok.Value;
 @Value
 public class ParseResponse {
 
-    GdprConsent result;
+    String consent;
+
+    GdprConsent parsedConsent;
 
     String error;
 
-    public static ParseResponse success(GdprConsent result) {
-        return ParseResponse.of(result, null);
+    public static ParseResponse success(String consent, GdprConsent gdprConsent) {
+        return ParseResponse.of(consent, gdprConsent, null);
     }
 
     public static ParseResponse error(String format, Object... args) {
-        return ParseResponse.of(null, String.format(format, args));
+        return ParseResponse.of(null, null, String.format(format, args));
     }
 }

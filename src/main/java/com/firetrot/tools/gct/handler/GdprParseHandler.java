@@ -34,12 +34,12 @@ public class GdprParseHandler implements HandlerFunction<ServerResponse> {
 
     private Mono<ServerResponse> processResponse(String consent) {
         return parser.parse(consent)
-                .flatMap(this::successResponse)
+                .flatMap(gdprConsent -> successResponse(gdprConsent, consent))
                 .onErrorResume(throwable -> errorResponse(throwable, consent));
     }
 
-    private Mono<ServerResponse> successResponse(GdprConsent gdprConsent) {
-        return respondWith(HttpStatus.OK, ParseResponse.success(gdprConsent));
+    private Mono<ServerResponse> successResponse(GdprConsent gdprConsent, String consent) {
+        return respondWith(HttpStatus.OK, ParseResponse.success(consent, gdprConsent));
     }
 
     private Mono<ServerResponse> errorResponse(Throwable throwable, String consent) {
