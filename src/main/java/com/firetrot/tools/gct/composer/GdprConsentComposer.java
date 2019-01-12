@@ -10,6 +10,10 @@ import java.util.function.Consumer;
 
 public class GdprConsentComposer {
 
+    /**
+     * Actually, there is no need for {@link Mono} wrapper here.
+     * This is just for learning purpose.
+     */
     public Mono<String> compose(ComposeRequest composeRequest) {
         final VendorConsentBuilder vendorConsentBuilder = new VendorConsentBuilder()
                 .withConsentRecordCreatedOn(Instant.now())

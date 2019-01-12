@@ -15,6 +15,6 @@ public class ErrorHandler implements HandlerFunction<ServerResponse> {
         return ServerResponse
                 .status(HttpStatus.NOT_FOUND)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .body(BodyInserters.fromObject("{\"result\":\"ok - ErrorHandler\"}"));
+                .body(BodyInserters.fromObject("{\"error\":\"404 - Not Found\"}"));
     }
 }

@@ -12,7 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.server.RequestPredicates;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
-import org.springframework.web.reactive.function.server.ServerResponse;
 
 @Configuration
 public class RouteConfiguration {
@@ -33,7 +32,7 @@ public class RouteConfiguration {
     }
 
     @Bean
-    public RouterFunction<ServerResponse> route(
+    public RouterFunction<?> route(
             GdprComposeHandler gdprComposeHandler,
             GdprParseHandler gdprParseHandler,
             ErrorHandler errorHandler) {
@@ -42,7 +41,7 @@ public class RouteConfiguration {
                 .route(RequestPredicates.GET("/api")
                         .and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), gdprParseHandler)
                 .andRoute(RequestPredicates.POST("/api")
-                        .and(RequestPredicates.accept(MediaType.APPLICATION_JSON_UTF8)), gdprComposeHandler);
-//                .andOther(RouterFunctions.route(RequestPredicates.all(), errorHandler));
+                        .and(RequestPredicates.accept(MediaType.APPLICATION_JSON_UTF8)), gdprComposeHandler)
+                .andOther(RouterFunctions.route(RequestPredicates.all(), errorHandler));
     }
 }

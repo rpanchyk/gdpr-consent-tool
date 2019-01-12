@@ -12,6 +12,10 @@ import java.util.TreeSet;
 
 public class GdprConsentParser {
 
+    /**
+     * Actually, there is no need for {@link Mono} wrapper here.
+     * This is just for learning purpose.
+     */
     public Mono<GdprConsent> parse(String consent) {
         try {
             return Mono.just(toGdprConsent(VendorConsentDecoder.fromBase64String(consent)));
