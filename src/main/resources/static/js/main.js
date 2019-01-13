@@ -14,7 +14,7 @@ $(document).ready(function () {
                 success: function (data) {
                     console.log(data);
 
-                    $('#parser_result').html('<pre>' + JSON.stringify(data, null, 2) + '</pre>');
+                    $('#parser_result').html('<pre>' + jsonPrettify(data) + '</pre>');
                 },
                 error: function (data) {
                     var error = data.responseJSON;
@@ -43,7 +43,7 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
 
-                $('#composer_result').html('<pre>' + JSON.stringify(data, null, 2) + '</pre>');
+                $('#composer_result').html('<pre>' + jsonPrettify(data) + '</pre>');
             },
             error: function (data) {
                 var error = data.responseJSON;
@@ -69,5 +69,27 @@ $(document).ready(function () {
             result[n['name']] = n['value'];
         });
         return result;
+    };
+
+    var jsonPrettify = function (json) {
+        if (typeof json !== 'string') {
+            json = JSON.stringify(json, undefined, 2);
+        }
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'key';
+                } else {
+                    cls = 'string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
     };
 });

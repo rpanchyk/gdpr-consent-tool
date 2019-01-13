@@ -7,3 +7,29 @@ body {
 input[type=text], input[type=number] {
     width: 50%;
 }
+
+pre {
+    outline: 1px solid #ccc;
+    padding: 5px;
+    margin: 5px;
+}
+
+.string {
+    color: green;
+}
+
+.number {
+    color: magenta;
+}
+
+.boolean {
+    color: blue;
+}
+
+.null {
+    color: pink;
+}
+
+.key {
+    color: red;
+}
