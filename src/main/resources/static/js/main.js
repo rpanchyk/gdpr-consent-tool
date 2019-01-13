@@ -16,11 +16,11 @@ $(document).ready(function () {
 
                     $('#parser_result').html('<pre>' + jsonPrettify(data) + '</pre>');
                 },
-                error: function (data) {
-                    var error = data.responseJSON;
-                    console.log(error);
+                error: function (error) {
+                    var data = error.responseJSON;
+                    console.log(data);
 
-                    $('#parser_error').html(JSON.stringify(error, null, 2));
+                    $('#parser_error').html(jsonPrettify(data));
                 }
             });
         }
@@ -45,11 +45,11 @@ $(document).ready(function () {
 
                 $('#composer_result').html('<pre>' + jsonPrettify(data) + '</pre>');
             },
-            error: function (data) {
-                var error = data.responseJSON;
-                console.log(error);
+            error: function (error) {
+                var data = error.responseJSON;
+                console.log(data);
 
-                $('#composer_error').html(JSON.stringify(error, null, 2));
+                $('#composer_error').html(jsonPrettify(data));
             }
         });
         event.preventDefault();

@@ -7,6 +7,8 @@ import com.iab.gdpr.consent.VendorConsent;
 import com.iab.gdpr.consent.VendorConsentDecoder;
 import reactor.core.publisher.Mono;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -29,8 +31,10 @@ public class GdprConsentParser {
     private static GdprConsent toGdprConsent(VendorConsent vendorConsent) {
         return GdprConsent.builder()
                 .version(vendorConsent.getVersion())
-                .consentRecordCreated(vendorConsent.getConsentRecordCreated())
-                .consentRecordLastUpdated(vendorConsent.getConsentRecordLastUpdated())
+                .consentRecordCreated(
+                        ZonedDateTime.ofInstant(vendorConsent.getConsentRecordCreated(), ZoneId.of("UTC")))
+                .consentRecordLastUpdated(
+                        ZonedDateTime.ofInstant(vendorConsent.getConsentRecordLastUpdated(), ZoneId.of("UTC")))
                 .cmpId(vendorConsent.getCmpId())
                 .cmpVersion(vendorConsent.getCmpVersion())
                 .consentScreen(vendorConsent.getConsentScreen())

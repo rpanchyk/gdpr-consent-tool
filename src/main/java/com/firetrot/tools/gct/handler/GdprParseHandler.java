@@ -39,7 +39,7 @@ public class GdprParseHandler implements HandlerFunction<ServerResponse> {
     }
 
     private Mono<ServerResponse> successResponse(GdprConsent gdprConsent, String consent) {
-        return respondWith(HttpStatus.OK, ParseResponse.success(consent, gdprConsent));
+        return respondWith(HttpStatus.OK, ParseResponse.success(gdprConsent));
     }
 
     private Mono<ServerResponse> errorResponse(Throwable throwable, String consent) {

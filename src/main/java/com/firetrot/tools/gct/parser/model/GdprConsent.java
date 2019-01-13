@@ -4,7 +4,7 @@ import com.iab.gdpr.Purpose;
 import lombok.Builder;
 import lombok.Value;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Set;
 
 @Builder
@@ -13,9 +13,9 @@ public class GdprConsent {
 
     int version;
 
-    Instant consentRecordCreated;
+    ZonedDateTime consentRecordCreated;
 
-    Instant consentRecordLastUpdated;
+    ZonedDateTime consentRecordLastUpdated;
 
     int cmpId;
 
