@@ -4,6 +4,6 @@ html {
 body {
 }
 
-input[type=text] {
-    width: 100%;
+input[type=text], input[type=number] {
+    width: 50%;
 }

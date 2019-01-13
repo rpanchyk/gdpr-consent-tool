@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // parser
-    $('#parser-form').submit(function (event) {
+    $('#parser_form').submit(function (event) {
         var consent = $('#consent').val();
         if ($.trim(consent) !== '') {
             $.ajax({
@@ -8,26 +8,66 @@ $(document).ready(function () {
                 url: '/api?consent=' + consent,
                 dataType: "json",
                 beforeSend: function (xhr) {
-                    $('#parser-result').html('');
-                    $('#parser-error').html('');
+                    $('#parser_result').html('');
+                    $('#parser_error').html('');
                 },
                 success: function (data) {
                     console.log(data);
 
-                    $('#parser-result').html('<pre>' + JSON.stringify(data, null, 2) + '</pre>');
+                    $('#parser_result').html('<pre>' + JSON.stringify(data, null, 2) + '</pre>');
                 },
                 error: function (data) {
-                    var json = data.responseJSON;
-                    console.log(json);
+                    var error = data.responseJSON;
+                    console.log(error);
 
-                    $('#parser-error').html(JSON.stringify(json, null, 2));
+                    $('#parser_error').html(JSON.stringify(error, null, 2));
                 }
             });
         }
         event.preventDefault();
-        return null;
+        return false;
     });
 
     // composer
-    //...
+    $('#composer_form').submit(function (event) {
+        var formData = JSON.stringify(serializeForm($(this)));
+        $.ajax({
+            type: 'POST',
+            url: '/api',
+            dataType: "json",
+            data: formData,
+            beforeSend: function (xhr) {
+                $('#composer_result').html('');
+                $('#composer_error').html('');
+            },
+            success: function (data) {
+                console.log(data);
+
+                $('#composer_result').html('<pre>' + JSON.stringify(data, null, 2) + '</pre>');
+            },
+            error: function (data) {
+                var error = data.responseJSON;
+                console.log(error);
+
+                $('#composer_error').html(JSON.stringify(error, null, 2));
+            }
+        });
+        event.preventDefault();
+        return false;
+    });
+
+    var serializeForm = function ($form) {
+        var result = {};
+        $.map($form.serializeArray(), function (n) {
+            if (n['name'] === 'allowed_purpose_ids' || n['name'] === 'allowed_vendor_ids') {
+                var arr = [];
+                n['value'].split(',').forEach(function (item) {
+                    arr.push($.trim(item));
+                });
+                n['value'] = arr;
+            }
+            result[n['name']] = n['value'];
+        });
+        return result;
+    };
 });
