@@ -92,4 +92,26 @@ $(document).ready(function () {
             return '<span class="' + cls + '">' + match + '</span>';
         });
     };
+
+    // tab state
+    $('#nav-parser-tab').click(function () {
+        console.log('nav-parser-tab');
+
+        Cookies.set('navTabState', 'parser', {expires: 365});
+    });
+    $('#nav-composer-tab').click(function () {
+        console.log('nav-composer-tab');
+
+        Cookies.set('navTabState', 'composer', {expires: 365});
+    });
+    $(document).ready(function () {
+        var navTabState = Cookies.get('navTabState');
+        console.log('navTabState: ' + navTabState);
+
+        if (navTabState === 'composer') {
+            $('#nav-composer-tab').trigger("click")
+        } else {
+            $('#nav-parser-tab').trigger("click")
+        }
+    });
 });
