@@ -1,5 +1,6 @@
 package com.firetrot.tools.gct.parser.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iab.gdpr.Purpose;
 import lombok.Builder;
 import lombok.Value;
@@ -27,13 +28,15 @@ public class GdprConsent {
 
     int vendorListVersion;
 
-    Set<Integer> allowedPurposeIds;
+    int maxVendorId;
 
+    @JsonIgnore
     Set<Purpose> allowedPurposes;
 
+    @JsonIgnore
     int allowedPurposesBits;
 
-    int maxVendorId;
+    Set<Integer> allowedPurposeIds;
 
     Set<Integer> allowedVendorIds;
 }

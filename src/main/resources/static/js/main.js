@@ -14,7 +14,7 @@ $(document).ready(function () {
                 success: function (data) {
                     console.log(data);
 
-                    $('#parser_result').html('<pre>' + jsonPrettify(data) + '</pre>');
+                    $('#parser_result').html('<pre class="border border-light bg-light">' + jsonPrettify(data) + '</pre>');
                 },
                 error: function (error) {
                     var data = error.responseJSON;
@@ -43,7 +43,13 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
 
-                $('#composer_result').html('<pre>' + jsonPrettify(data) + '</pre>');
+                $('#composer_result').html('<pre class="border border-light bg-light">' + jsonPrettify(data) + '</pre>');
+
+                // fill parser field to be kind
+                var consent = $('#consent').val();
+                if ($.trim(consent) === '') {
+                    $('#consent').val(data['consent']);
+                }
             },
             error: function (error) {
                 var data = error.responseJSON;

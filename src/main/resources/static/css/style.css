@@ -5,47 +5,54 @@ html {
 }
 
 body {
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 
 header {
-    margin: 4px auto;
-    text-align: center;
+    margin: 10px auto;
+    /*text-align: center;*/
+    font-size: xx-large;
+    font-weight: bold;
+    color: #555555;
 }
 
 footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 41px;
-    line-height: 41px;
+    height: 34px;
+    line-height: 26px;
     border-top: 1px solid #dee2e6;
     text-align: center;
 }
 
 /*Form*/
 form {
-    margin: 4px auto;
+    margin-top: 10px;
 }
 
 label {
-    margin: 4px auto 0;
+    /*margin: 0 auto;*/
+}
+
+small {
+    /*margin-top: 0;*/
 }
 
 textarea {
-    width: 600px;
-    margin: 0 auto;
-    border-color: #dee2e6;
+    /*width: 600px;*/
+    /*margin: 0 auto;*/
+    /*border-color: #dee2e6;*/
 }
 
 input[type=text], input[type=number] {
-    width: 200px;
-    margin: 0 auto;
+    /*width: 200px;*/
+    /*margin: 0 auto;*/
 }
 
 input[type=submit] {
-    width: 200px;
-    margin: 8px auto;
+    /*width: 200px;*/
+    /*margin: 8px auto;*/
 }
 
 /*Json*/
@@ -73,4 +80,9 @@ pre {
 
 .key {
     color: red;
+}
+
+/*Common*/
+.margin_left {
+    /*margin-left: 0 !important;*/
 }
