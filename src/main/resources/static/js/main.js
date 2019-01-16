@@ -1,4 +1,6 @@
-$(document).ready(function () {
+$(function () {
+    setActiveTab();
+
     // parser
     $('#parser_form').submit(function (event) {
         var consent = $('#consent').val();
@@ -43,12 +45,18 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
 
-                $('#composer_result').html('<pre class="border border-light bg-light">' + jsonPrettify(data) + '</pre>');
+                $('#composer_result').html(
+                    '<div class="bd-clipboard">'
+                    + '<button class="btn-clipboard" title="Copy consent to clipboard" onclick="copyToClipboard(\'' + data['consent'] + '\'); $(this).tooltip(\'dispose\');$(this).attr(\'title\',\'Copied!\');$(this).tooltip(\'show\');" data-toggle="tooltip-composer" data-placement="top">Copy</button>'
+                    + '</div>'
+                    + '<pre class="border border-light bg-light">' + jsonPrettify(data) + '</pre>');
+
+                $('[data-toggle="tooltip-composer"]').tooltip();
 
                 // fill parser field to be kind
-                var consent = $('#consent').val();
-                if ($.trim(consent) === '') {
-                    $('#consent').val(data['consent']);
+                var consent = $('#consent');
+                if ($.trim(consent.val()) === '') {
+                    consent.val(data['consent']);
                 }
             },
             error: function (error) {
@@ -61,63 +69,72 @@ $(document).ready(function () {
         event.preventDefault();
         return false;
     });
+});
 
-    var serializeForm = function ($form) {
-        var result = {};
-        $.map($form.serializeArray(), function (n) {
-            if (n['name'] === 'allowed_purpose_ids' || n['name'] === 'allowed_vendor_ids') {
-                var arr = [];
-                n['value'].split(',').forEach(function (item) {
-                    arr.push($.trim(item));
-                });
-                n['value'] = arr;
-            }
-            result[n['name']] = n['value'];
-        });
-        return result;
-    };
-
-    var jsonPrettify = function (json) {
-        if (typeof json !== 'string') {
-            json = JSON.stringify(json, undefined, 2);
+function serializeForm(form) {
+    var result = {};
+    $.map(form.serializeArray(), function (n) {
+        if (n['name'] === 'allowed_purpose_ids' || n['name'] === 'allowed_vendor_ids') {
+            var arr = [];
+            n['value'].split(',').forEach(function (item) {
+                arr.push($.trim(item));
+            });
+            n['value'] = arr;
         }
-        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
-            var cls = 'number';
-            if (/^"/.test(match)) {
-                if (/:$/.test(match)) {
-                    cls = 'key';
-                } else {
-                    cls = 'string';
-                }
-            } else if (/true|false/.test(match)) {
-                cls = 'boolean';
-            } else if (/null/.test(match)) {
-                cls = 'null';
+        result[n['name']] = n['value'];
+    });
+    return result;
+}
+
+function jsonPrettify(json) {
+    if (typeof json !== 'string') {
+        json = JSON.stringify(json, undefined, 2);
+    }
+    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+        var cls = 'number';
+        if (/^"/.test(match)) {
+            if (/:$/.test(match)) {
+                cls = 'key';
+            } else {
+                cls = 'string';
             }
-            return '<span class="' + cls + '">' + match + '</span>';
-        });
-    };
+        } else if (/true|false/.test(match)) {
+            cls = 'boolean';
+        } else if (/null/.test(match)) {
+            cls = 'null';
+        }
+        return '<span class="' + cls + '">' + match + '</span>';
+    });
+}
 
-    // tab state
-    $('#nav-parser-tab').click(function () {
-        console.log('nav-parser-tab');
+function setActiveTab() {
+    var parserTab = $('#nav-parser-tab');
+    var composerTab = $('#nav-composer-tab');
 
+    parserTab.click(function () {
+        // console.log('nav-parser-tab');
         Cookies.set('navTabState', 'parser', {expires: 365});
     });
-    $('#nav-composer-tab').click(function () {
-        console.log('nav-composer-tab');
-
+    composerTab.click(function () {
+        // console.log('nav-composer-tab');
         Cookies.set('navTabState', 'composer', {expires: 365});
     });
-    $(document).ready(function () {
-        var navTabState = Cookies.get('navTabState');
-        console.log('navTabState: ' + navTabState);
 
-        if (navTabState === 'composer') {
-            $('#nav-composer-tab').trigger("click")
-        } else {
-            $('#nav-parser-tab').trigger("click")
-        }
-    });
-});
+    var navTabState = Cookies.get('navTabState');
+    // console.log('navTabState: ' + navTabState);
+
+    if (navTabState === 'composer') {
+        composerTab.trigger("click")
+    } else {
+        parserTab.trigger("click")
+    }
+}
+
+function copyToClipboard(str) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val(str).select();
+    document.execCommand("copy");
+    $temp.remove();
+}

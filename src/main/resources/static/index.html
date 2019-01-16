@@ -25,7 +25,7 @@
 
 <header>
     <a href="/"><img src="images/gdpr-logo.png" alt="GDPR"/></a>
-    <span class="title">GDPR Consent Tool</span>
+    <a href="/" class="title">GDPR Consent Tool</a>
 </header>
 
 <div class="container-fluid">
@@ -42,8 +42,9 @@
             <!--<h2>Parser</h2>-->
             <form id="parser_form">
                 <div class="form-group row">
-                    <label for="consent" class="col-sm-1 col-form-label">Consent String</label>
-                    <div class="col-sm-11"></div>
+                    <label for="consent" class="col-sm-auto col-form-label form-col-1">
+                        Consent String
+                    </label>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-6">
@@ -52,7 +53,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-sm-2">
+                    <div class="col-sm-auto">
                         <input type="submit" value="Parse Consent String" class="form-control btn btn-outline-primary"/>
                     </div>
                 </div>
@@ -64,77 +65,93 @@
             <!--<h2>Composer</h2>-->
             <form id="composer_form">
                 <div class="form-group row">
-                    <label for="cmp_id" class="col-sm-2 col-form-label">Consent Manager Provider ID</label>
-                    <div class="col-sm-1">
+                    <label for="cmp_id" class="col-sm-2 col-form-label form-col-1">
+                        Consent Manager Provider ID
+                    </label>
+                    <div class="col-sm-1 form-col-2">
                         <input type="number" id="cmp_id" name="cmp_id" value="1" class="form-control"
                                title="number" required/>
                     </div>
-                    <small class="form-text text-muted col-sm-9">(cmpId)</small>
+                    <small class="form-text text-muted col-sm-auto">(cmpId)</small>
                 </div>
                 <div class="form-group row">
-                    <label for="cmp_version" class="col-sm-2 col-form-label">Consent Manager Provider version</label>
-                    <div class="col-sm-1">
+                    <label for="cmp_version" class="col-sm-2 col-form-label form-col-1">
+                        Consent Manager Provider version
+                    </label>
+                    <div class="col-sm-1 form-col-2">
                         <input type="number" id="cmp_version" name="cmp_version" value="1" class="form-control"
                                title="number" required/>
                     </div>
-                    <small class="form-text text-muted col-sm-9">(cmpVersion)</small>
+                    <small class="form-text text-muted col-sm-auto">(cmpVersion)</small>
                 </div>
                 <div class="form-group row">
-                    <label for="consent_screen" class="col-sm-2 col-form-label">Screen number in the CMP</label>
-                    <div class="col-sm-1">
+                    <label for="consent_screen" class="col-sm-2 col-form-label form-col-1">
+                        Screen number in the CMP
+                    </label>
+                    <div class="col-sm-1 form-col-2">
                         <input type="number" id="consent_screen" name="consent_screen" value="1" class="form-control"
                                title="number" required/>
                     </div>
-                    <small class="form-text text-muted col-sm-9">(consentScreen)</small>
+                    <small class="form-text text-muted col-sm-auto">(consentScreen)</small>
                 </div>
                 <div class="form-group row">
-                    <label for="consent_language" class="col-sm-2 col-form-label">Two-letter Language code</label>
-                    <div class="col-sm-1">
+                    <label for="consent_language" class="col-sm-2 col-form-label form-col-1">
+                        Two-letter Language code
+                    </label>
+                    <div class="col-sm-1 form-col-2">
                         <input type="text" id="consent_language" name="consent_language" value="EN"
                                class="form-control" title="string" required/>
                     </div>
-                    <small class="form-text text-muted col-sm-9">(consentLanguage)</small>
+                    <small class="form-text text-muted col-sm-auto">(consentLanguage)</small>
                 </div>
                 <div class="form-group row">
-                    <label for="vendor_list_version" class="col-sm-2 col-form-label">Version of Vendor list</label>
-                    <div class="col-sm-1">
+                    <label for="vendor_list_version" class="col-sm-2 col-form-label form-col-1">
+                        Version of Vendor list
+                    </label>
+                    <div class="col-sm-1 form-col-2">
                         <input type="number" id="vendor_list_version" name="vendor_list_version" value="113"
                                class="form-control" title="number" required/>
                     </div>
-                    <small class="form-text text-muted col-sm-9">(vendorListVersion)</small>
+                    <small class="form-text text-muted col-sm-auto">(vendorListVersion)</small>
                 </div>
                 <div class="form-group row">
-                    <label for="max_vendor_id" class="col-sm-2 col-form-label">Maximum Vendor ID</label>
-                    <div class="col-sm-1">
+                    <label for="max_vendor_id" class="col-sm-2 col-form-label form-col-1">
+                        Maximum Vendor ID
+                    </label>
+                    <div class="col-sm-1 form-col-2">
                         <input type="number" id="max_vendor_id" name="max_vendor_id" value="544" class="form-control"
                                title="number" required/>
                     </div>
-                    <small class="form-text text-muted col-sm-9">(maxVendorId)</small>
+                    <small class="form-text text-muted col-sm-auto">(maxVendorId)</small>
                 </div>
                 <div class="form-group row">
-                    <label for="allowed_purpose_ids" class="col-sm-2 col-form-label">Set of Purpose IDs</label>
-                    <div class="col-sm-1">
+                    <label for="allowed_purpose_ids" class="col-sm-2 col-form-label form-col-1">
+                        Set of Purpose IDs
+                    </label>
+                    <div class="col-sm-1 form-col-2">
                         <input type="text" id="allowed_purpose_ids" name="allowed_purpose_ids" value="1,3"
                                class="form-control" title="comma-separated numbers" required/>
                     </div>
-                    <small class="form-text text-muted col-sm-9">(allowedPurposeIds)</small>
+                    <small class="form-text text-muted col-sm-auto">(allowedPurposeIds)</small>
                 </div>
                 <div class="form-group row">
-                    <label for="allowed_vendor_ids" class="col-sm-2 col-form-label">Set of Vendor IDs</label>
-                    <div class="col-sm-1">
+                    <label for="allowed_vendor_ids" class="col-sm-2 col-form-label form-col-1">
+                        Set of Vendor IDs
+                    </label>
+                    <div class="col-sm-1 form-col-2">
                         <input type="text" id="allowed_vendor_ids" name="allowed_vendor_ids" value="32,52"
                                class="form-control" title="comma-separated numbers" required/>
                     </div>
-                    <small class="form-text text-muted col-sm-9">(allowedVendorIds)</small>
+                    <small class="form-text text-muted col-sm-auto">(allowedVendorIds)</small>
                 </div>
                 <div class="form-group row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-auto">
                         <input type="submit" value="Compose Consent String"
                                class="form-control btn btn-outline-primary"/>
                     </div>
                 </div>
             </form>
-            <div id="composer_result"></div>
+            <div id="composer_result" class="result"></div>
             <div id="composer_error"></div>
         </div>
     </div>
