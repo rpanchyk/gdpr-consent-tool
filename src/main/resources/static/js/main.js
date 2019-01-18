@@ -3,6 +3,8 @@ $(function () {
 
     // parser
     $('#parser_form').submit(function (event) {
+        event.preventDefault();
+
         var consent = $('#consent').val();
         if ($.trim(consent) !== '') {
             $.ajax({
@@ -26,12 +28,14 @@ $(function () {
                 }
             });
         }
-        event.preventDefault();
+
         return false;
     });
 
     // composer
     $('#composer_form').submit(function (event) {
+        event.preventDefault();
+
         var formData = JSON.stringify(serializeForm($(this)));
         $.ajax({
             type: 'POST',
@@ -46,10 +50,10 @@ $(function () {
                 console.log(data);
 
                 $('#composer_result').html(
-                    '<div class="bd-clipboard">'
-                    + '<button class="btn-clipboard" title="Copy consent to clipboard" onclick="copyToClipboard(\'' + data['consent'] + '\'); $(this).tooltip(\'dispose\');$(this).attr(\'title\',\'Copied!\');$(this).tooltip(\'show\');" data-toggle="tooltip-composer" data-placement="top">Copy</button>'
-                    + '</div>'
-                    + '<pre class="border border-light bg-light">' + jsonPrettify(data) + '</pre>');
+                    '<button class="btn-clipboard2" title="Copy to clipboard" onclick="copyToClipboard(\'' + data['consent'] + '\'); $(this).tooltip(\'dispose\');$(this).attr(\'title\',\'Copied!\');$(this).tooltip(\'show\');return false;" data-toggle="tooltip-composer" data-placement="top">'
+                    + '<img class="clippy" src="images/clippy.svg" width="14"/>'
+                    + '</button>'
+                    + '<input type="text" class="form-control text-success" value="' + data['consent'] + '" readonly/>');
 
                 $('[data-toggle="tooltip-composer"]').tooltip();
 
@@ -66,7 +70,7 @@ $(function () {
                 $('#composer_error').html(jsonPrettify(data));
             }
         });
-        event.preventDefault();
+
         return false;
     });
 });

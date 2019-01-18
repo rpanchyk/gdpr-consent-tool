@@ -24,8 +24,7 @@
 <body>
 
 <header>
-    <a href="/"><img src="images/gdpr-logo.png" alt="GDPR"/></a>
-    <a href="/" class="title">GDPR Consent Tool</a>
+    <a href="/" class="title"><img src="images/gdpr-logo.png" alt="GDPR"/>GDPR Consent Tool</a>
 </header>
 
 <div class="container-fluid">
@@ -47,19 +46,17 @@
                     </label>
                 </div>
                 <div class="form-group row">
-                    <div class="col-sm-6">
-                        <textarea id="consent" rows="4" class="form-control" placeholder="Paste here..."
-                                  required></textarea>
-                    </div>
+                    <textarea id="consent" rows="4" class="form-control parser_input" placeholder="Paste here..."
+                              required></textarea>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-auto">
                         <input type="submit" value="Parse Consent String" class="form-control btn btn-outline-primary"/>
                     </div>
                 </div>
+                <div id="parser_result" class="result"></div>
+                <div id="parser_error" class="result"></div>
             </form>
-            <div id="parser_result"></div>
-            <div id="parser_error"></div>
         </div>
         <div class="tab-pane fade" id="nav-composer" role="tabpanel" aria-labelledby="nav-composer-tab">
             <!--<h2>Composer</h2>-->
@@ -69,7 +66,7 @@
                         Consent Manager Provider ID
                     </label>
                     <div class="col-sm-1 form-col-2">
-                        <input type="number" id="cmp_id" name="cmp_id" value="1" class="form-control"
+                        <input type="number" id="cmp_id" name="cmp_id" value="1" min="0" class="form-control"
                                title="number" required/>
                     </div>
                     <small class="form-text text-muted col-sm-auto">(cmpId)</small>
@@ -79,7 +76,7 @@
                         Consent Manager Provider version
                     </label>
                     <div class="col-sm-1 form-col-2">
-                        <input type="number" id="cmp_version" name="cmp_version" value="1" class="form-control"
+                        <input type="number" id="cmp_version" name="cmp_version" value="1" min="0" class="form-control"
                                title="number" required/>
                     </div>
                     <small class="form-text text-muted col-sm-auto">(cmpVersion)</small>
@@ -89,8 +86,8 @@
                         Screen number in the CMP
                     </label>
                     <div class="col-sm-1 form-col-2">
-                        <input type="number" id="consent_screen" name="consent_screen" value="1" class="form-control"
-                               title="number" required/>
+                        <input type="number" id="consent_screen" name="consent_screen" value="1" min="0"
+                               class="form-control" title="number" required/>
                     </div>
                     <small class="form-text text-muted col-sm-auto">(consentScreen)</small>
                 </div>
@@ -100,7 +97,8 @@
                     </label>
                     <div class="col-sm-1 form-col-2">
                         <input type="text" id="consent_language" name="consent_language" value="EN"
-                               class="form-control" title="string" required/>
+                               pattern="[a-zA-Z]{2}" class="form-control" title="two-letter ISO639-1 language code"
+                               required/>
                     </div>
                     <small class="form-text text-muted col-sm-auto">(consentLanguage)</small>
                 </div>
@@ -109,8 +107,8 @@
                         Version of Vendor list
                     </label>
                     <div class="col-sm-1 form-col-2">
-                        <input type="number" id="vendor_list_version" name="vendor_list_version" value="113"
-                               class="form-control" title="number" required/>
+                        <input type="number" id="vendor_list_version" name="vendor_list_version" value="123"
+                               min="1" class="form-control" title="number" required/>
                     </div>
                     <small class="form-text text-muted col-sm-auto">(vendorListVersion)</small>
                 </div>
@@ -119,8 +117,8 @@
                         Maximum Vendor ID
                     </label>
                     <div class="col-sm-1 form-col-2">
-                        <input type="number" id="max_vendor_id" name="max_vendor_id" value="544" class="form-control"
-                               title="number" required/>
+                        <input type="number" id="max_vendor_id" name="max_vendor_id" value="100" min="1"
+                               class="form-control" title="number" required/>
                     </div>
                     <small class="form-text text-muted col-sm-auto">(maxVendorId)</small>
                 </div>
@@ -130,7 +128,7 @@
                     </label>
                     <div class="col-sm-1 form-col-2">
                         <input type="text" id="allowed_purpose_ids" name="allowed_purpose_ids" value="1,3"
-                               class="form-control" title="comma-separated numbers" required/>
+                               pattern="\d+?(,\d+)*" class="form-control" title="comma-separated numbers" required/>
                     </div>
                     <small class="form-text text-muted col-sm-auto">(allowedPurposeIds)</small>
                 </div>
@@ -140,7 +138,7 @@
                     </label>
                     <div class="col-sm-1 form-col-2">
                         <input type="text" id="allowed_vendor_ids" name="allowed_vendor_ids" value="32,52"
-                               class="form-control" title="comma-separated numbers" required/>
+                               pattern="\d+?(,\d+)*" class="form-control" title="comma-separated numbers" required/>
                     </div>
                     <small class="form-text text-muted col-sm-auto">(allowedVendorIds)</small>
                 </div>
@@ -150,15 +148,17 @@
                                class="form-control btn btn-outline-primary"/>
                     </div>
                 </div>
+                <div id="composer_result" class="result"></div>
+                <div id="composer_error" class="result"></div>
             </form>
-            <div id="composer_result" class="result"></div>
-            <div id="composer_error"></div>
         </div>
     </div>
 </div>
 
 <footer>
-    <small class="form-text text-muted">&copy; FireTrot</small>
+    <small class="form-text text-muted">Designed by &copy; <a href="http://firetrot.com/" target="_blank">FireTrot</a>,
+        inspired by <a href="https://www.decodeconsentstring.com/" target="_blank">Decode Consent String</a>
+    </small>
 </footer>
 
 </body>

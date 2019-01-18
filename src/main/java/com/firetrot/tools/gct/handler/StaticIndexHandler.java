@@ -21,7 +21,7 @@ public class StaticIndexHandler implements HandlerFunction<ServerResponse> {
     @Override
     public Mono<ServerResponse> handle(ServerRequest request) {
         return ServerResponse
-                .status(HttpStatus.NOT_FOUND)
+                .status(HttpStatus.OK)
                 .contentType(MediaType.TEXT_HTML)
                 .syncBody(new ClassPathResource(path));
     }
