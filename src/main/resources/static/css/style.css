@@ -122,6 +122,14 @@ pre {
     /*max-width: fit-content;*/
 }
 
+.result-error {
+    /*background-color: #c82333;*/
+    /*overflow-x: auto;*/
+    resize: none;
+    /*width: 100%;*/
+    /*min-height: 100%;*/
+}
+
 /*Common*/
 .margin_left {
     /*margin-left: 0 !important;*/

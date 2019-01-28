@@ -24,7 +24,9 @@ $(function () {
                     var data = error.responseJSON;
                     console.log(data);
 
-                    $('#parser_error').html(jsonPrettify(data));
+                    // $('#parser_error').html(jsonPrettify(data));
+                    $('#parser_error').html('<textarea class="form-control p-2 mb-2 border-danger rounded-0 bg-danger text-white result-error" disabled>' + data.error + '</textarea>');
+                    textAreaAdjust($('#parser_error textarea'));
                 }
             });
         }
@@ -67,7 +69,9 @@ $(function () {
                 var data = error.responseJSON;
                 console.log(data);
 
-                $('#composer_error').html(jsonPrettify(data));
+                // $('#composer_error').html(jsonPrettify(data.error));
+                $('#composer_error').html('<textarea class="form-control p-2 mb-2 border-danger rounded-0 bg-danger text-white result-error" disabled>' + data.error + '</textarea>');
+                textAreaAdjust($('#composer_error textarea'));
             }
         });
 
@@ -141,4 +145,11 @@ function copyToClipboard(str) {
     $temp.val(str).select();
     document.execCommand("copy");
     $temp.remove();
+}
+
+function textAreaAdjust(o) {
+    o.css("height", "1px");
+    setTimeout(function () {
+        o.css("height", (o.prop('scrollHeight')) + "px");
+    }, 1);
 }
