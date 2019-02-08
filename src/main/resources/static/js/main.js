@@ -150,6 +150,6 @@ function copyToClipboard(str) {
 function textAreaAdjust(o) {
     o.css("height", "1px");
     setTimeout(function () {
-        o.css("height", (o.prop('scrollHeight')) + "px");
+        o.css("height", (o.prop('scrollHeight') + 2) + "px");
     }, 1);
 }
