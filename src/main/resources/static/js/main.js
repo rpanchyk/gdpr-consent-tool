@@ -18,14 +18,14 @@ $(function () {
                 success: function (data) {
                     console.log(data);
 
-                    $('#parser_result').html('<pre class="border border-light bg-light">' + jsonPrettify(data) + '</pre>');
+                    $('#parser_result').html('<pre class="border rounded bg-light">' + jsonPrettify(data) + '</pre>');
                 },
                 error: function (error) {
                     var data = error.responseJSON;
                     console.log(data);
 
                     // $('#parser_error').html(jsonPrettify(data));
-                    $('#parser_error').html('<textarea class="form-control p-2 mb-2 rounded-1 result-error" disabled>' + data.error + '</textarea>');
+                    $('#parser_error').html('<textarea class="form-control p-2 mb-2 rounded result-error" disabled>' + data.error + '</textarea>');
                     textAreaAdjust($('#parser_error textarea'));
                 }
             });
@@ -52,7 +52,7 @@ $(function () {
                 console.log(data);
 
                 $('#composer_result').html(
-                    '<button class="btn-clipboard2" title="Copy to clipboard" onclick="copyToClipboard(\'' + data['consent'] + '\'); $(this).tooltip(\'dispose\');$(this).attr(\'title\',\'Copied!\');$(this).tooltip(\'show\');return false;" data-toggle="tooltip-composer" data-placement="top">'
+                    '<button class="btn-clipboard" title="Copy to clipboard" onclick="copyToClipboard(\'' + data['consent'] + '\'); $(this).tooltip(\'dispose\');$(this).attr(\'title\',\'Copied!\');$(this).tooltip(\'show\');return false;" data-toggle="tooltip-composer" data-placement="top">'
                     + '<img class="clippy" src="images/clippy.svg" width="14"/>'
                     + '</button>'
                     + '<input type="text" class="form-control text-success" value="' + data['consent'] + '" readonly/>');
