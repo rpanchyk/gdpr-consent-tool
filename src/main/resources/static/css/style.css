@@ -20,6 +20,7 @@ header a {
     display: block;
     height: 100px;
     line-height: 100px;
+    white-space: nowrap;
 }
 
 header a:hover {
@@ -149,4 +150,11 @@ pre {
     margin-top: -5px;
     position: relative;
     line-height: 24px;
+}
+
+/*For other devices*/
+@media (max-width: 370px) {
+    header {
+        font-size: large;
+    }
 }
