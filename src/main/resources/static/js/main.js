@@ -25,7 +25,7 @@ $(function () {
                     console.log(data);
 
                     // $('#parser_error').html(jsonPrettify(data));
-                    $('#parser_error').html('<textarea class="form-control p-2 mb-2 border-danger rounded-0 bg-danger text-white result-error" disabled>' + data.error + '</textarea>');
+                    $('#parser_error').html('<textarea class="form-control p-2 mb-2 rounded-1 result-error" disabled>' + data.error + '</textarea>');
                     textAreaAdjust($('#parser_error textarea'));
                 }
             });
@@ -70,7 +70,7 @@ $(function () {
                 console.log(data);
 
                 // $('#composer_error').html(jsonPrettify(data.error));
-                $('#composer_error').html('<textarea class="form-control p-2 mb-2 border-danger rounded-0 bg-danger text-white result-error" disabled>' + data.error + '</textarea>');
+                $('#composer_error').html('<textarea class="form-control p-2 mb-2 rounded-1 result-error" disabled>' + data.error + '</textarea>');
                 textAreaAdjust($('#composer_error textarea'));
             }
         });
